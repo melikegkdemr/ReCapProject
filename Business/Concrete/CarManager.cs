@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    //SOLİD >> O harfi 
     public class CarManager : ICarService
     {
         ICarDal _iCarDal;
@@ -23,6 +24,21 @@ namespace Business.Concrete
 
             return _iCarDal.GetAll();
             
+        }
+
+        public List<Car> GetByDailyPrice(int min)
+        {
+            return _iCarDal.GetAll(p=> p.DailyPrice>= min);
+        }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _iCarDal.GetAll(c => c.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _iCarDal.GetAll(c => c.ColorId == id);
         }
     }
 }
