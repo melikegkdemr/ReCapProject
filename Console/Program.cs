@@ -25,29 +25,54 @@ namespace ConsoleUI
             //colorManager.Add(new Color { Name = "Turuncu" });
             //colorManager.Add(new Color { Name = "Mor" });
 
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+             var rentStation1 = rentalManager.Add(new Rental { CarId = 1, CustomerId = 2, RentDate = new DateTime(2021,02,12), ReturnDate = new DateTime(2021,03,12) });
+
+            Console.WriteLine(rentStation1.Message);
+            
+
+            var rentStation2 = rentalManager.Add(new Rental { CarId = 1, CustomerId = 1, RentDate = new DateTime(2021, 03, 10) });
+
+            Console.WriteLine(rentStation2.Message);
+            
+            
+
+             rentalManager.Add(new Rental { CarId = 2, CustomerId = 3, RentDate = new DateTime(2021, 03, 11) });
+            
 
 
-            var result = carManager.GetCarDetails();
+
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            var result = userManager.GetUserDetailDto();
 
             if (result.Success)
             {
-                foreach (var car in result.Data)
+                foreach (var user in result.Data)
                 {
-                    Console.WriteLine(car.CarName + "/" + car.BrandName);
+                    Console.WriteLine(user.FirstName + ">>" + user.CompanyName);
                 }
             }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
 
 
 
 
+            //var result = carManager.GetCarDetails();
 
+            //if (result.Success)
+            //{
+            //    foreach (var car in result.Data)
+            //    {
+            //        Console.WriteLine(car.CarName + "/" + car.BrandName);
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine(result.Message);
+            //}
 
-
-
+            
 
 
         }
